@@ -1,3 +1,7 @@
+"""
+Alignment of sequences
+"""
+
 from Bio import SeqIO, pairwise2
 from Bio.Seq import reverse_complement
 import edlib
