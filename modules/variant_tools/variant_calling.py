@@ -63,7 +63,6 @@ class Insertion(Operator):
     def __str__(self):
         return "{}_{}ins{}".format(self.pos, self.pos + 1, "".join(self.alt))
 
-
   
 def get_opcode(ref_base, alt_base):
     """
