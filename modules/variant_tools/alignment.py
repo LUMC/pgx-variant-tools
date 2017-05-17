@@ -126,3 +126,38 @@ def get_alignment(ref_seq, query_seq, match=3, mismatch=-3, gap_open=-9, gap_ext
         print("Warning: MAX_ALIGNMENTS ({}) exceeded".format(pairwise2.MAX_ALIGNMENTS), file=sys.stderr)
     
     return pick_leftmost(alns)
+
+
+def pretty_alignment(seq1, seq2, start=0, end=None, width=200, match=" ", mismatch="*", gap="#"):
+    """
+    Pretty string representation of the alignment
+    :param seq1, seq2: aligned sequence strings
+    :param start:      the alignment position at which to start
+    :param end:        the alignment position at which to end
+    :param width:      the number of characters per line
+    :param match:      character used to represent a match
+    :param mismatch:   character used to represent a mismatch
+    :param gap:        character used to represent a gap
+    """
+    pos = start
+    if end is None:
+        end = len(seq1)
+    
+    def match_symbol(base1, base2):
+        if base1 == base2:
+            return match
+        if base1 == "-" or base2 == "-":
+            return gap
+        return mismatch
+        
+    pretty = []
+
+    while pos < end:
+        num_bases = width if pos + width < end else end-pos
+        pretty.append(seq1[pos: pos + num_bases])
+        pretty.append("".join([match_symbol(seq1[pos+i], seq2[pos+i]) for i in range(num_bases)]))
+        pretty.append(seq2[pos:pos+num_bases])
+        pretty.append("")
+        pos += width
+        
+    return "\n".join(pretty)
