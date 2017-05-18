@@ -102,7 +102,6 @@ def apply_variants(variants, chrAcc, start, end):
     :param chrAcc: Accession number for the target chromosome sequence
     :param start: start position of genomic region
     :param end: end position of genomic region
-    :param url: the url of the mutalyzer web service
     :return: A string containing the 'mutated' sequence
     """
     chr_id = get_mutalyzer_region_id(chrAcc, start, end)
