@@ -84,6 +84,9 @@ def apply_variants_mutalyzer(variants, chr_id):
     :param chr_id: the mutalyzer id for the target reference region
     :return: A string containing the 'mutated' sequence
     """
+    if len(variants) == 0:
+        variants = ["1dup", "1del"] # this will give reference sequence
+
     mutalyzer_url = "{}/json/runMutalyzer".format(MUTALYZER)
     mutalyzer_params = {
         "variant": chr_id + ":g.[{}]".format(";".join(variants))

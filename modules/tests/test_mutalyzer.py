@@ -17,6 +17,7 @@ def test_get_mutalyzer_region_id():
 
 
 variant_data1 = [
+    ([], "CGTTTTGGGGTGTCATATATG"),
     (["1C>T"], "TGTTTTGGGGTGTCATATATG"),
     (["1C>T", "2G>A"], "TATTTTGGGGTGTCATATATG"),
     (["3_6del", "7_8insCC"], "CGGCCGGGTGTCATATATG")
@@ -29,6 +30,7 @@ def test_apply_variants_mutalyzer(vars, expected):
 
 
 variant_data2 = [
+    ([], "CGTTTTGGGGTGTCATATATG"),
     (["42126100C>T"], "TGTTTTGGGGTGTCATATATG"),
     (["42126100C>T", "42126101G>A"], "TATTTTGGGGTGTCATATATG"),
     (["42126102_42126105del"], "CGGGGGTGTCATATATG"),
