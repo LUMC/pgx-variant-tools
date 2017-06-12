@@ -41,6 +41,9 @@ class Operator(object):
 
 
 class Substitution(Operator):
+    """
+    substitution operator
+    """
     opcode = Opcodes.SUB
     
     def __str__(self):
@@ -48,6 +51,9 @@ class Substitution(Operator):
     
     
 class Deletion(Operator):
+    """
+    deletion operator
+    """
     opcode = Opcodes.DEL
     
     def __str__(self):
@@ -58,6 +64,9 @@ class Deletion(Operator):
 
 
 class Insertion(Operator):
+    """
+    insertion operator
+    """
     opcode = Opcodes.INS
     
     def __str__(self):
