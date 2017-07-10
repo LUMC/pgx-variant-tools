@@ -12,6 +12,7 @@ setup(
     packages=["variant_tools"],
     install_requires=[
         'biopython==1.69',
+        'Cython',
         'edlib==1.1.2'
     ],
     tests_requires=['pytest'],
