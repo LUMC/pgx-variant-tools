@@ -10,6 +10,11 @@ setup(
     license="MIT",
     platforms=['any'],
     packages=["variant_tools"],
+    install_requires=[
+        'biopython==1.69',
+        'edlib==1.1.2'
+    ],
+    tests_requires=['pytest'],
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
