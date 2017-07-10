@@ -46,8 +46,10 @@ def adjust_strand_dir(query_seq, ref_seq):
     This is achieved by determining the edit distance between query_seq and its reverse_complement
     to 'ref_seq', and choosing the direction which gives the smallest distance
         
-    :param ref_seq: A biopython SeqRecord containing the reference sequence
-    :param query_seq: A biopython SeqRecord containing the query sequence
+    :param ref_seq: The reference sequence
+    :type ref_seq: string
+    :param query_seq: The query sequence
+    :type query_seq: string
     :param verbose: A flag indicating if results should be printed to console
     :return: A SeqRecord containing the query sequence adjusted to match the reference direction
     """
@@ -100,7 +102,7 @@ def pick_leftmost(alignments):
     return best_alignment
 
 
-def get_alignment(ref_seq, query_seq, match=3, mismatch=-3, gap_open=-9, gap_extend=-2, semi_global=False):
+def get_alignment(ref_seq, query_seq, match=3, mismatch=-3, gap_open=-9, gap_extend=-2, semi_global=False, adjust_strand=False):
     """
     Perform a (semi) global alignment of two sequences
     
@@ -115,6 +117,11 @@ def get_alignment(ref_seq, query_seq, match=3, mismatch=-3, gap_open=-9, gap_ext
     
     :return: The top scoring, most left-aligned alignment
     """
+    # adjust strand direction if requested
+    if adjust_strand:
+        query_seq = adjust_strand_dir(query_seq, ref_seq)
+    
+    # do the alignment
     alns = pairwise2.align.globalms(
         ref_seq, query_seq,
         match, mismatch, gap_open, gap_extend,
@@ -122,6 +129,7 @@ def get_alignment(ref_seq, query_seq, match=3, mismatch=-3, gap_open=-9, gap_ext
         penalize_extend_when_opening = True
     )
     
+    # print out a warning if max_alignments is reached, as in this case correct justification is not guaranteed
     if len(alns) == pairwise2.MAX_ALIGNMENTS:
         print("Warning: MAX_ALIGNMENTS ({}) exceeded".format(pairwise2.MAX_ALIGNMENTS), file=sys.stderr)
     
