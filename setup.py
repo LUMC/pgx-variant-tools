@@ -16,6 +16,11 @@ setup(
         'edlib==1.1.2.post2'
     ],
     tests_requires=['pytest'],
+    entry_points={
+      "console_scripts": [
+          "vcf2sequence = variant_tools.cli:vcf2sequence"
+      ]
+    },
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

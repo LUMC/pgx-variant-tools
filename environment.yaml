@@ -6,3 +6,4 @@ dependencies:
   - edlib=1.1.2
   - cyvcf2
   - requests
+  - click
