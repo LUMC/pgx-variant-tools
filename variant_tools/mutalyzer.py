@@ -109,3 +109,19 @@ def apply_variants(variants, chrAcc, start, end):
     """
     chr_id = get_mutalyzer_region_id(chrAcc, start, end)
     return apply_variants_mutalyzer([offset_hgvs(v, -start + 1) for v in variants], chr_id)
+
+
+def chrom_to_accession(chrom, build='hg19'):
+    """
+    Generate accession number from chromosome name
+    :param chrom: name of chromosome
+    :param build: The genome build
+    :return: A string containing the accession number
+    """
+    mutalyzer_url = "{0}/json/chromAccession".format(MUTALYZER)
+    mutalyzer_params = {
+        'build': build,
+        'name': chrom
+    }
+    response = requests.get(url=mutalyzer_url, params=mutalyzer_params)
+    return response.json()
