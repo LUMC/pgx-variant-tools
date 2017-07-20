@@ -45,4 +45,14 @@ def test_region_to_sequence(vcf, acdict):
     assert vcf_tools.region_to_sequence(vcf, reg, 0, acdict) == "GCACAGGCAGACAGAAGTCCCCGCCCCAGCTGTGTGGCCTCAAGCCAGCCTTCCGCTCCTTGAAGCTGGTCTCCGCACAGTGCTGGTTCCATCACCCCCAC"
 
 
+def test_sequence_to_fasta():
+    seq = "AAAAAA"
+    name = "test1"
+    assert vcf_tools.sequence_to_fasta(seq, name) == ">test1\nAAAAAA\n"
 
+
+def test_region_to_fasta(vcf, acdict):
+    reg = utils.Region('chr1', 14500, 14600)
+    assert vcf_tools.region_to_fasta(vcf, reg, 0, acdict) == ">chr1:14500-14600\nGCACAGGCAGACAGAAGTCCCCGCCCCAGCTGTGTGGCCTCAAGCCAGCCTTCCGCTCCT\nTGAAGCTGGTCTCCGCACAGTGCTGGTTCCATCACCCCCAC\n"
+    reg2 = utils.Region('chr1', 14500, 14600, "test")
+    assert vcf_tools.region_to_fasta(vcf, reg2, 0, acdict) == ">test\nGCACAGGCAGACAGAAGTCCCCGCCCCAGCTGTGTGGCCTCAAGCCAGCCTTCCGCTCCT\nTGAAGCTGGTCTCCGCACAGTGCTGGTTCCATCACCCCCAC\n"

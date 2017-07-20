@@ -2,6 +2,9 @@
 Utilities for vcf records
 """
 
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+
 from .mutalyzer import chrom_to_accession, apply_variants
 from .utils import HGVS
 
@@ -85,3 +88,35 @@ def region_to_sequence(reader, region, sample_idx, accession_dict=None):
     if accession_dict is not None:
         return apply_variants(hgs, accession_dict[region.chromosome], region.start, region.end)
     return apply_variants(hgs, region.chromosome, region.start, region.end)
+
+
+def sequence_to_fasta(sequence, name):
+    """
+    Create fasta string of a sequence and name
+    :param sequence: string with sequence
+    :param name: name of sequence
+    :return: fasta string. This _will_ contain newlines
+    """
+    s = Seq(sequence)
+    r = SeqRecord(s, id=name, description="")
+    return r.format("fasta")
+
+
+def region_to_fasta(reader, region, sample_idx, accession_dict=None):
+    """
+    Create fasta string from vcf region
+
+    The name of the fasta sequence will be the region's value attribute.
+    If this attribute is None, the string representation of the region
+    will be the fasta record name.
+    :param reader: cyvcf2.reader
+    :param region: Region object
+    :param sample_idx: sample index
+    :param accession_dict: optional dictionary of chrom -> accession nr
+    :return: fasta string. Contains newlines.
+    """
+    seq = region_to_sequence(reader, region, sample_idx, accession_dict)
+    if region.value is not None:
+        return sequence_to_fasta(seq, region.value)
+    else:
+        return sequence_to_fasta(seq, str(region))
