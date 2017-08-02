@@ -50,7 +50,10 @@ def vcf_to_hgvs(record, sample_idx, accession_dict=None):
             chrom = accession_dict[record.CHROM]
         else:
             chrom = record.CHROM
-        desc_str = "{0}del{1}ins{2}".format(pos_str, record.REF, alt)
+        if len(str(record.REF)) == 1 and  len(alt) == 1:
+            desc_str = "{0}{1}>{2}".format(pos_str, record.REF, alt)
+        else:
+            desc_str = "{0}del{1}ins{2}".format(pos_str, record.REF, alt)
         hg = HGVS(chrom, "g", desc_str)
         hgvs.append(hg)
     return hgvs
