@@ -3,6 +3,7 @@ Utilities using the Mutalyzer web service
 """
 import requests
 from collections import defaultdict
+from json.decoder import JSONDecodeError
 import re
 
 # cache for mutalyzer sliceChromosome results
@@ -92,6 +93,15 @@ def apply_variants_mutalyzer(variants, chr_id):
         "variant": chr_id + ":g.[{}]".format(";".join(variants))
     }
     response = requests.get(url=mutalyzer_url, params=mutalyzer_params)
+
+    if not response.ok:
+        if response.status_code == 400:
+            msg = "Bad request"
+        elif response.status_code == 414:
+            msg = "Request too large"
+        else:
+            msg = response.text
+        raise ValueError(msg)
     sequence = response.json()
 
     return sequence["mutated"]
