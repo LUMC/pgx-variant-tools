@@ -176,7 +176,7 @@ default_alignment_opts = dict(
     gap_open=-9,
     gap_extend=-2,
     penalize_opening=True,
-    semi_global=False
+    semi_global=True
 )
 
 def get_alignment(ref_seq, query_seq, aln_opts={}):
