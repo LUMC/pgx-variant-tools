@@ -7,3 +7,5 @@ dependencies:
   - cyvcf2
   - requests
   - click
+  - pip:
+    - pyinterval==1.2.0
