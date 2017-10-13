@@ -13,7 +13,8 @@ setup(
     install_requires=[
         'numpy==1.13.1',
         'biopython==1.69',
-        'edlib==1.1.2.post2'
+        'edlib==1.1.2.post2',
+        'pyinterval==1.2.0'
     ],
     tests_requires=['pytest'],
     entry_points={

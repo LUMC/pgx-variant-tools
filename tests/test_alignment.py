@@ -129,3 +129,30 @@ def test_get_alignment(data):
     aln = alignment.get_alignment(data[0], data[1])
     assert aln[0] == data[2]
     assert aln[1] == data[3]
+
+
+@pytest.mark.parametrize("data", test_alignment_data)
+def test_alignment(data):
+    aln = alignment.align(data[0], data[1], window=50)
+    assert aln[0] == data[2]
+    assert aln[1] == data[3]
+
+
+test_find_indel_data = [
+    ("AGAGGGC---TAAT", "AGAGGGCCCCTAAT", [7,8,9]),
+    ("CCCAGCC-AATTCTTTTTTTTTTTTTTTTTTTTTTGGAGACGGAGAT-", "-CCAGCCTAATTCTT-TTTTTTTTTTTTTTTTTTTG-AGACGGAGATT", [0,7,15,36,47])
+]
+
+@pytest.mark.parametrize("data", test_find_indel_data)
+def test_find_indels(data):
+    assert list(alignment.find_indels(data[0], data[1])) == data[2]
+
+
+def test_parse_cigar():
+    assert alignment.parse_cigar("4=1I5X2D") == [(4,"="), (1, "I"), (5, "X"), (2, "D")]
+
+
+def test_apply_cigar():
+    data=("AGAGGGCTAAT", "AAGGGCCCCTTAT", "AGAGGGC---TAAT", "A-AGGGCCCCTTAT")
+    cigar = "1=1I5=3D1=1X2="
+    assert alignment.apply_cigar(data[0], data[1], cigar) == {"query": data[2], "target": data[3]}

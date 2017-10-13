@@ -85,6 +85,7 @@ variant_test_data = [
     [("AGAGGGCCCCTAA", "AGAGGTCACGTAA"), 9999,  ["10005G>T", "10007C>A", "10009C>G"]],
 ]
 
+
 @pytest.mark.parametrize("sequences,offset,expected", variant_test_data)
 def test_call_variants(sequences, offset, expected):
     variants = [str(v) for v in variant_calling.call_variants(sequences, offset)]
