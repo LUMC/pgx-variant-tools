@@ -198,7 +198,7 @@ def get_alignment(ref_seq, query_seq, aln_opts={}):
         opts["mismatch"],
         opts["gap_open"],
         opts["gap_extend"],
-        penalize_end_gaps=opts["semi_global"],
+        penalize_end_gaps=not opts["semi_global"],
         penalize_extend_when_opening=opts["penalize_opening"]
     )
     
