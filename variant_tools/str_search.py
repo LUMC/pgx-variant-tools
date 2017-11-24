@@ -49,3 +49,26 @@ def str_search(repeat_unit, sequence, start_pos=0, offset=0):
             num_units=(result.span()[1] - result.span()[0]) // len(repeat_unit),
             repeat_sequence=result.group(0)
         )
+
+
+def str_search_aligned(repeat_unit, sequence):
+    """
+    Search a (gapped) aligned sequence for short tandem repeats of a canonical repeat_unit
+
+    :param repeat_unit: The canonical repeat unit
+    :param sequence:    The (aligned) sequence to search within
+    :return: a summary dict for each found repeat
+    """
+    regex_string = "(" + "".join(["{}[-]*".format(n) for n in repeat_unit]) + "){2,}"
+    regex = re.compile(regex_string)
+    for result in regex.finditer(sequence):
+        gapped_seq = result.group(0)
+        ungapped_seq = gapped_seq.replace("-", "")
+        yield dict(
+            start = result.span()[0],
+            end = result.span()[1] - 1,
+            canonical_unit = repeat_unit,
+            num_units = len(ungapped_seq) // len(repeat_unit),
+            gapped_sequence = gapped_seq,
+            ungapped_sequence = ungapped_seq
+        )
