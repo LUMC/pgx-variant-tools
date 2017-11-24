@@ -63,6 +63,8 @@ def test_get_opcode():
     assert variant_calling.get_opcode("-", "A") == variant_calling.Opcodes.INS
     assert variant_calling.get_opcode("A", "-") == variant_calling.Opcodes.DEL
     assert variant_calling.get_opcode("A", "G") == variant_calling.Opcodes.SUB
+    assert variant_calling.get_opcode("A", "$") == variant_calling.Opcodes.SKIP
+    assert variant_calling.get_opcode("$", "A") == variant_calling.Opcodes.SKIP
 
 
 variant_test_data = [
@@ -83,6 +85,9 @@ variant_test_data = [
     [("AGAG----CCTAA", "AGAGGGCCCCTAA"), 770,   ["774_775insGGCC"]],
     [("AGAGGGCCCCTAA", "AGAGGTCACGTAA"), 0,     ["6G>T", "8C>A", "10C>G"]],
     [("AGAGGGCCCCTAA", "AGAGGTCACGTAA"), 9999,  ["10005G>T", "10007C>A", "10009C>G"]],
+    [("AGAGGGCCCCTAA", "AGAGGTCACG$$A"), 9999,  ["10005G>T", "10007C>A", "10009C>G"]],
+    [("AGAGGGCCCCTAA", "AGAG----$$TAA"), 0,     ["5_8delGGCC"]],
+    [("$$AGGGCCCCTAA", "AGAG----$$TAA"), 0,     ["5_8delGGCC"]],
 ]
 
 
