@@ -86,6 +86,8 @@ def region_to_sequence(reader, region, sample_idx, accession_dict=None):
     """
     hgs = [x.description for x in region_to_hgvs(reader, region, sample_idx, accession_dict)]
     if accession_dict is not None:
+        if region.chromosome not in accession_dict:
+            accession_dict.update({region.chromosome: chrom_to_accession(region.chromosome)})
         return apply_variants(hgs, accession_dict[region.chromosome], region.start, region.end)
     return apply_variants(hgs, region.chromosome, region.start, region.end)
 
