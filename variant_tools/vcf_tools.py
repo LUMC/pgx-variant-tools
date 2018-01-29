@@ -44,7 +44,7 @@ def vcf_to_hgvs(record, sample_idx, accession_dict=None):
         pos_str = "{0}_{1}".format(record.POS, record.POS + len(str(record.REF)) - 1)
     hgvs = []
     for alt in true_alt:
-        if alt == "." or alt is None:
+        if alt == "." or alt == "*" or alt is None:
             continue
         if accession_dict is not None:
             chrom = accession_dict[record.CHROM]
