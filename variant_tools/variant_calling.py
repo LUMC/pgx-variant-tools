@@ -17,6 +17,7 @@ class Opcodes(Enum):
     SUB = 1
     INS = 2
     DEL = 3
+    SKIP = 4
 
 
 class Operator(object):
@@ -83,6 +84,8 @@ def get_opcode(ref_base, alt_base):
     """
     if ref_base == alt_base:
         return Opcodes.EQ
+    if ref_base == "$" or alt_base == "$":
+        return Opcodes.SKIP
     if ref_base == "-":
         return Opcodes.INS
     if alt_base == "-":
