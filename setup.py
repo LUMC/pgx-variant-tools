@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pgx-variant-tools",
-    version="0.0.2",
+    version="0.0.3",
     description="Tools for working with variants.",
     author="Guy Allard",
     author_email="wgallard@lumc.nl",
@@ -28,7 +28,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Scientific/Engineering',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: MIT',
     ],
     keywords='bioinformatics'
 )
