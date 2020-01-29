@@ -1,13 +1,12 @@
 from setuptools import setup
 
 setup(
-    name="variant_tools",
-    version="0.0.1",
+    name="pgx-variant-tools",
+    version="0.0.2",
     description="Tools for working with variants.",
     author="Guy Allard",
-    author_email="wgallard AT lumc DOT nl",
-    url="https://git.lumc.nl/PharmacogenomicsPipe/variant_tools.git",
-    license="MIT",
+    author_email="wgallard@lumc.nl",
+    url="https://github.com/LUMC/pgx-variant-tools",
     platforms=['any'],
     packages=["variant_tools"],
     install_requires=[
@@ -22,14 +21,14 @@ setup(
           "vcf2sequence = variant_tools.cli:vcf2sequence"
       ]
     },
-    classifiers = [
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Scientific/Engineering',
-        'License :: MIT License',
+        'License :: OSI Approved :: MIT License',
     ],
-    keywords = 'bioinformatics'
+    keywords='bioinformatics'
 )
