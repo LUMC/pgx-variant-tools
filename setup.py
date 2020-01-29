@@ -28,7 +28,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Scientific/Engineering',
-        'License :: OSI Approved :: MIT',
+        'License :: OSI Approved :: MIT License',
     ],
     keywords='bioinformatics'
 )
