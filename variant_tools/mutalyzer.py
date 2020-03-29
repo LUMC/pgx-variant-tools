@@ -2,6 +2,7 @@
 Utilities using the Mutalyzer web service
 """
 import requests
+from suds.client import Client as suds_client
 from collections import defaultdict
 import re
 
@@ -87,14 +88,13 @@ def apply_variants_mutalyzer(variants, chr_id):
     if len(variants) == 0:
         variants = ["1dup", "1del"] # this will give reference sequence
 
-    mutalyzer_url = "{}/json/runMutalyzer".format(MUTALYZER)
-    mutalyzer_params = {
-        "variant": chr_id + ":g.[{}]".format(";".join(variants))
-    }
-    response = requests.get(url=mutalyzer_url, params=mutalyzer_params)
-    sequence = response.json()
+    mutalyzer_variant = chr_id + ":g.[{}]".format(";".join(variants))
+    mutalyzer_url = "{}/services/?wsdl".format(MUTALYZER)
 
-    return sequence["mutated"]
+    client = suds_client(mutalyzer_url, cache=None)
+    response = client.service.runMutalyzer(mutalyzer_variant)
+
+    return response["mutated"]
 
 
 def apply_variants(variants, chrAcc, start, end):
