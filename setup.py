@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pgx-variant-tools",
-    version="0.0.3",
+    version="0.0.4",
     description="Tools for working with variants.",
     author="Guy Allard",
     author_email="wgallard@lumc.nl",
@@ -13,7 +13,8 @@ setup(
         'numpy==1.13.1',
         'biopython==1.69',
         'edlib==1.1.2.post2',
-        'pyinterval==1.2.0'
+        'pyinterval==1.2.0',
+        'suds-jurko==0.6',
     ],
     tests_requires=['pytest'],
     entry_points={
