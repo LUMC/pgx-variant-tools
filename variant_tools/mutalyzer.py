@@ -124,4 +124,7 @@ def chrom_to_accession(chrom, build='hg19'):
         'name': chrom
     }
     response = requests.get(url=mutalyzer_url, params=mutalyzer_params)
-    return response.json()
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(response.json()['faultstring'])

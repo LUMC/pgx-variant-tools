@@ -73,3 +73,17 @@ chrom_data = [
 @pytest.mark.parametrize("chrom, acc", chrom_data)
 def test_chrom_to_accession(chrom, acc):
     assert mutalyzer.chrom_to_accession(chrom) == acc
+
+
+no_chrom_data = [
+    ('chrUn_gl000239', "NT_167233.1")
+]
+
+
+@pytest.mark.parametrize("chrom, acc", no_chrom_data)
+def test_chrom_to_accession_fail(chrom, acc):
+    try:
+        ret = mutalyzer.chrom_to_accession(chrom)
+        assert ret != acc
+    except Exception as e:
+        pass
