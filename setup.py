@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pgx-variant-tools",
-    version="0.0.4",
+    version="0.0.5",
     description="Tools for working with variants.",
     author="Guy Allard",
     author_email="wgallard@lumc.nl",
