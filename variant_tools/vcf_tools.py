@@ -17,7 +17,8 @@ def generate_accession_dict(reader, build='hg19'):
     :param build: genome build
     :return: dict of chrom -> accession
     """
-    return {c: chrom_to_accession(c, build) for c in reader.seqnames}
+    seqnames = list(set([record.CHROM for record in reader]))
+    return {c: chrom_to_accession(c, build) for c in seqnames}
 
 
 def vcf_to_hgvs(record, sample_idx, accession_dict=None):
