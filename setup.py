@@ -10,7 +10,7 @@ setup(
     platforms=['any'],
     packages=["variant_tools"],
     install_requires=[
-        'numpy==1.13.1',
+        'numpy==1.22.0',
         'biopython==1.69',
         'edlib==1.1.2.post2',
         'pyinterval==1.2.0',
